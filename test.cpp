@@ -24,8 +24,9 @@ int main () {
 
     // string
     std::string name = "Park Paul";
-    std::cout << name;
-
+    int age = 20;
+    std::cout << name << "'s age is " << age  << std::endl;
+    
     return 0; // exit code zero
 
 }
