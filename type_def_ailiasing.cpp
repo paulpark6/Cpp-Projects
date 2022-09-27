@@ -9,7 +9,5 @@ int main () {
     int age = 100;
     cout << name << endl;
     cout << occ << endl;
-    cout << age << endl;
-    cout << (char) age  << endl;
     return 0;
 }
