@@ -1,13 +1,14 @@
 #include <iostream>
 using namespace std;
 int main() {
+/*
     int age;
     cout << "What is your age?";
     cin >> age;
     if (age >= 18) {
         cout << "Welcome to the site" << endl;
     } else {
-        cout << "no!";
+        cout << "no!" << endl;
     }
 
     // switch case
@@ -35,5 +36,11 @@ int main() {
         cout << "Enter (A - F)" << endl;
         break;
     }
+*/
+    // ternary operatr "?" -> replacement to an if else satement
+    int num = 4;
+    !(num%2) ? cout << "even" : cout << "odd" << endl;
+
+
     return 0;
 }
