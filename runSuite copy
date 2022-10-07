@@ -1,0 +1,19 @@
+#!/bin/bash
+# input has suite-file, programToTest, sampleProgram
+# suite-file contains names of files containing cmd line arguments of each test. 
+if [ ${#} -ne 3 ]; then
+    "Fatal Error" 2> /tmp/error
+    cat /tmp/error
+    rm /tmp/error
+    exit 1
+fi
+for file in $(cat ${1}); do
+echo "Test failed: ${file}"
+echo "Args:"
+echo "$(cat "${file}.args")"
+echo "Expected:"
+echo "$(${2} $(cat "$file.args"))"
+echo "Actual:"
+echo "$(${3} $(cat "$file.args"))"
+done
+exit 0

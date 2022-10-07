@@ -1,0 +1,35 @@
+#!/bin/bash
+# input has suite-file, programToTest, sampleProgram
+# suite-file contains names of files containing cmd line arguments of each test. 
+if [ ${#} -ne 3 ]; then
+    echo "Incorrect number of command line arguments"
+    exit 1
+fi
+for file in $(cat ${1}); do
+    if [ ! -e "$file.args" ]; then # file does not exist
+            if [ "$(${2})" != "$(${3})" ]; then
+                echo "Test failed: ${file}"
+                echo "Args:"
+                echo "$(cat "${file}.args")"
+                echo "Expected:"
+                echo "$(cat ${3})"
+                echo "Actual:"
+                echo "$(cat ${2})"
+            fi
+    elif [ -r "$file.args" ]; then # file exist is readable but test output is different
+            # compare outputs
+            if [ "$(${2} $(cat "$file.args"))" != "$(${3} $(cat "$file.args"))" ]; then
+                echo "Test failed: ${file}"
+                echo "Args:"
+                echo "$(cat "${file}.args")"
+                echo "Expected:"
+                echo "$(${3} $(cat "$file.args"))"
+                echo "Actual:"
+                echo "$(${2} $(cat "$file.args"))"
+            fi
+    else
+        echo "Fatal Error. File exist but not readable"
+        exit 1 
+    fi       
+done
+exit 0

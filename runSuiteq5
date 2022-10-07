@@ -1,0 +1,68 @@
+#!/bin/bash
+# input has suite-file, programToTest, sampleProgram
+# suite-file contains names of files containing cmd line arguments of each test. 
+if [ ${#} -ne 3 ]; then
+    echo "Incorrect number of command line arguments"
+    exit 1
+fi
+for file in $(cat ${1}); do
+    if  [ ! -e "${file}.args" -a ! -e "${file}.in" ]; then # file.args file.in does not exist
+        if [ "$(${2})" != "$(${3})" ]; then
+            echo "Test failed: ${file}"
+            echo "Args:"
+            echo "$(cat "${file}")"
+            echo "Input:"
+            echo "Expected:"
+            echo "$(cat ${3})"
+            echo "Actual:"
+            echo "$(cat ${2})"
+        fi
+    # only file.args exist
+    elif [ -r "${file}.args" -a ! -e "${file}.in" ]; then 
+        # compare outputs
+        if [ "$(${2} $(cat "${file}.args"))" != "$(${3} $(cat "${file}.args"))" ]; then
+            echo "Test failed: ${file}"
+            echo "Args:"
+            echo "$(cat "${file}.args")"                
+            echo "Input:"
+            echo "Expected:"
+            echo "$(${3} $(cat "$file.args"))"
+            echo "Actual:"
+            echo "$(${2} $(cat "$file.args"))"
+        fi
+    # only file.in exist
+    elif [ -r "${file}.in" -a ! -e "${file}.args" ]; then 
+        # compare outputs
+        if [ "$(${2} < "${file}.in")" != "$(${3} < "${file}.in")" ]; then
+            echo "Test failed: ${file}"
+            echo "Args:"             
+            echo "Input:"
+            echo "$(cat "${file}.in")"
+            echo "Expected:"
+            echo $(${3} < "$file.in")
+            echo "Actual:"
+            echo $(${2} < "$file.in")
+        fi
+    # both exist
+    elif [ -r "${file}.in" -a -r "${file}.args" ]; then 
+        # compare
+        if [ "$( ${2} $(cat "${file}.args") < ${file}.in)" !=  "$(${3} $(cat "${file}.args") < ${file}.in)" ]; then
+            echo "Test failed: ${file}"
+            echo "Args:"       
+            echo "$(cat "${file}.args")"      
+            echo "Input:"
+            echo "$(cat "${file}.in")"
+            echo "Expected:"
+            echo $(${3} $(cat ${test}.args) < ${test}.in)
+            echo "Actual:"
+            echo $(${2} $(cat ${test}.args) < ${test}.in)
+        fi
+    elif [ -e "${file}.args" -a ! -r "${file}.args"]; then
+        echo "Fatal Error. ${file}.args exist but not readable"
+        exit 1
+    else
+        echo "Fatal Error. ${file}.in exist but not readable"
+        exit 1 
+    fi       
+done
+exit 0
