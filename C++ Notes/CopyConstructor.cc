@@ -9,7 +9,7 @@ struct Node {
 };
 
 int main () {
-    Node *n = new Node {1, new Node {2, new Node {3, nullptr}}};
+    Node *n = new Node {new Node {new Node {nullptr}}};
     Node m = *n;
     Node *p = new Node{*n};
     delete(p);
