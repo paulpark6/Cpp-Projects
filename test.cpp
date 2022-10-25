@@ -26,6 +26,7 @@ int main () {
     std::string name = "Park Paul";
     int age = 20;
     std::cout << name << "'s age is " << age  << std::endl;
+    cout << name;
     
     return 0; // exit code zero
 

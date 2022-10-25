@@ -6,6 +6,7 @@ using namespace std;
 struct Student {
     int assns = 0 , mt = 0, final = 0;
     const int id;
+    // copy constructor
     Student (const Student & other) : assns {other.assns}, mt{other.mt}, final{other.final}, id{other.id} {}
     // constructor for giving user defined values (MIL)
     Student (int assns, int mt, int final, int id) : assns{assns}, mt{mt}, final{final},id{id} {}

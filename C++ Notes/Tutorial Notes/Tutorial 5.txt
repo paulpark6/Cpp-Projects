@@ -1,0 +1,37 @@
+Classes in C++
+    - structure that can contain functions
+    - member functions have an implicit this keyword
+    - "this" is a pointer to the class the member function is running for
+
+Constructor -> creating new object
+Destructor -> Ran when an object is deleted
+Copy Constructor -> using an object as the parameter to a new object
+Copy Assignment -> setting an object to be equal to another object
+Move constructor -> moving data from one object to another when constructing
+Move Assignment -> ...
+
+MIL -> member initialization list
+    - best to initialize class parameter with MIL
+    - Allows const and refernce parameters, and objects with no default constructor to be defined durign construction
+    
+Copy Constructor:
+    - allows another object to be used to define a new object
+    - a copy constructor is created by default 
+
+Destructor
+    - Methodran when a program goes out of scope
+    - Built in destructor calls destructors for all fields that are objects
+
+Copy Assignment
+    - Used when reassigning an object to another one
+    - using "=" like we declare variable but with object to object
+
+Rvalue refeencefa-spin
+    - requires for move contrusctors/assignment
+    - similar to lvalues references but for Rvalue
+    - at the right side of assignment
+    - Designed to avoid needless copiesby referencing a temporary value rather than storing it into a variable
+
+Move constructor
+    - used when you want to move all contents of one object into a new one
+    - meant to avoid copying data needlessly
