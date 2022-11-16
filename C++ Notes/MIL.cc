@@ -33,7 +33,7 @@ int main () {
     Student s1 = {1,2,3,20949359};
     Student s2 = {s1};
     const int x = 21347399;
-    Student s3 = {x}; // need help here (how to use explicit)
+    Student s3 {x}; // need help here (how to use explicit)
     cout << s1 << endl;
     cout << s2 << endl;
     return 0;
